@@ -1,0 +1,7 @@
+{
+	"name": "Template",
+	"description": "Create your own FNF mod using the template folder.",
+	"restart":false,
+	"runsGlobally": false,
+	"color": [170, 0, 255]
+}

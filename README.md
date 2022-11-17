@@ -7,10 +7,12 @@ Cooljer - Arts
 OS Engine Special Thanks
 jonnycat - Fixing bugs in Engine <3.
 Kade Engine - Circle Note Skin
+
 **Psych Engine Credits:**
 Shadow Mario - Programmer
 RiverOaken - Artist
 Yoshubs - Assistant Programmer
+
 **Psych Engine Special Thanks**
 bbpanzu - Ex-Programmer
 shubs - New Input System

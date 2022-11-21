@@ -91,10 +91,10 @@ class PlayState extends MusicBeatState
 		['C', 0.6], //From 50% to 59%
 		['B', 0.69], //From 60% to 68%
 		['A', 0.7], //69%
-		['AA', 0.8], //From 70% to 79%
-		['AAA', 0.9], //From 80% to 89%
-		['AAAA', 1], //From 90% to 99%
-		['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['S+', 0.8], //From 70% to 79%
+		['SS++', 0.9], //From 80% to 89%
+		['SS+++', 1], //From 90% to 99%
+		['SSS+++++', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -183,7 +183,6 @@ class PlayState extends MusicBeatState
 	public var combo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
-	public var healthBarOverlay:FlxSprite;
 	public var healthBar:FlxBar;
 	var songPercent:Float = 0;
 
@@ -346,10 +345,10 @@ class PlayState extends MusicBeatState
 			['C', 0.6], //From 50% to 59%
 			['B', 0.69], //From 60% to 68%
 			['A', 0.7], //69%
-			['AA', 0.8], //From 70% to 79%
-			['AAA', 0.9], //From 80% to 89%
-			['AAAA', 1], //From 90% to 99%
-			['AAAAA', 1] //The value on this one isn't used actually, since Perfect is always "1"
+			['S+', 0.8], //From 70% to 79%
+			['SS++', 0.9], //From 80% to 89%
+			['SS+++', 1], //From 90% to 99%
+			['SSS+++++', 1] //The value on this one isn't used actually, since Perfect is always "1"
 		];
 
 		// for lua
@@ -1262,19 +1261,6 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
-		healthBarOverlay = new FlxSprite().loadGraphic(Paths.image('healthBarOverlay'));
-		healthBarOverlay.y = FlxG.height * 0.89;
-		healthBarOverlay.screenCenter(X);
-		healthBarOverlay.scrollFactor.set();
-		healthBarOverlay.visible = !ClientPrefs.hideHud;
-        healthBarOverlay.color = FlxColor.BLACK;
-		healthBarOverlay.blend = MULTIPLY;
-		healthBarOverlay.x = healthBarBG.x-1.9;
-	    healthBarOverlay.alpha = ClientPrefs.healthBarAlpha;
-		healthBarOverlay.antialiasing = ClientPrefs.globalAntialiasing;
-		add(healthBarOverlay); healthBarOverlay.alpha = ClientPrefs.healthBarAlpha; if(ClientPrefs.downScroll) healthBarOverlay.y = 0.11 * FlxG.height;
-
-
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.hideHud;
@@ -1309,7 +1295,7 @@ class PlayState extends MusicBeatState
 			songTxt.visible = false;
 		}
 		add(songTxt);
-		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "| Fizzy Engine " + MainMenuState.fizzyEngineVersion;
+		songTxt.text = curSong + " (" + storyDifficultyText + ") " + "- FE:Vortex Edition " + MainMenuState.fizzyEngineVersion;
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "[Autoplay]", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1326,7 +1312,6 @@ class PlayState extends MusicBeatState
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
-		healthBarOverlay.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
@@ -2468,15 +2453,13 @@ class PlayState extends MusicBeatState
 	{
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore 
-			+ ' | Combo Breaks: ' + songMisses 
-			+ ' | Average: ?'
-			+ ' | Accuracy: ' + ratingName;
+			+ ' - Combo Breaks: ' + songMisses 
+			+ ' - Accuracy: ' + ratingName;
 		} else {
 			scoreTxt.text = 'Score: ' + songScore 
-			+ ' | Combo Breaks: ' + songMisses 
-			+ ' | Average: ' + Math.round(averageMs) + 'ms'
-			+ ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' 
-			+ ' | ' + ratingName + ' [' + ratingFC + ']';
+			+ ' - Combo Breaks: ' + songMisses 
+			+ ' - Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' 
+			+ ' - Grade: ' + ratingName + ' [' + ratingFC + ']';
 		}
 
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
@@ -5493,15 +5476,13 @@ class PlayState extends MusicBeatState
 
 	function StrumPlayAnim(isDad:Bool, id:Int, time:Float) {
 		var spr:StrumNote = null;
-		if(isDad) {
+		if(isDad)
 			spr = strumLineNotes.members[id];
-		} else {
-			spr = playerStrums.members[id];
-		}
-
-		if(spr != null) {
-			spr.playAnim('confirm', true);
-			spr.resetAnim = time;
+		else {
+			if(cpuControlled)
+				return;
+			else
+				spr = playerStrums.members[id];
 		}
 	}
 

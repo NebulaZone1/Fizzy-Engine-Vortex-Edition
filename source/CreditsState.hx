@@ -81,7 +81,7 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Fizzy Engine Vortex Editor'],
+			['Fizzy Engine Vortex Edition'],
 			['Fizzy Bott', 'fizzy', 'Engine creator', 'https://twitter.com/FizzyBott1', '9E29CF'],
 			[''],
 			['Original OS Engine Team'],

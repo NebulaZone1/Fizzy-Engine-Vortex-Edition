@@ -94,7 +94,7 @@ class PlayState extends MusicBeatState
 		['S+', 0.8], //From 70% to 79%
 		['SS++', 0.9], //From 80% to 89%
 		['SS+++', 1], //From 90% to 99%
-		['SSS+++++', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['SSS++++', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 	public static var animatedShaders:Map<String, DynamicShaderHandler> = new Map<String, DynamicShaderHandler>();
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -348,7 +348,7 @@ class PlayState extends MusicBeatState
 			['S+', 0.8], //From 70% to 79%
 			['SS++', 0.9], //From 80% to 89%
 			['SS+++', 1], //From 90% to 99%
-			['SSS+++++', 1] //The value on this one isn't used actually, since Perfect is always "1"
+			['SSS++++', 1] //The value on this one isn't used actually, since Perfect is always "1"
 		];
 
 		// for lua

@@ -1,4 +1,4 @@
-OS Engine Fork
+Fizzy Engine: Vortex Edition is a moddified version of OS Engine which is a moddified version of Psych Engine.
 
 **OS Engine Credits:**
 weuz_ - Coding

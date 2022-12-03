@@ -158,6 +158,11 @@ class Paths
 		return 'assets/$file';
 	}
 
+	inline public static function getModsPath(file:String = '')
+		{
+			return 'mods/FNF/$file';
+		}
+
 	inline static public function file(file:String, type:AssetType = TEXT, ?library:String)
 	{
 		return getPath(file, type, library);
